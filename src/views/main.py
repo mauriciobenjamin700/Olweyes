@@ -27,9 +27,9 @@ MAIN_BUTTON_HEIGHT = 40
 PRECISION_BUTTON_WIDTH = MAIN_BUTTON_WIDTH//3
 PRECISION_BUTTON_HEIGHT =  MAIN_BUTTON_HEIGHT//2
 
-FONT = join(root,"fonts","Inknut_Antiqua","InknutAntiqua-Bold.ttf")
 BUTTON_COLOR = "#FAFF00"
 OFF_BUTTON_COLOR = "#ABAE0C" 
+HOVER_COLOR = "#00FF00"  # Cor quando o mouse passa sobre o botão
 #OFF_BUTTON_COLOR = "#FF0000"
 
 
@@ -50,7 +50,6 @@ class myPanel(wx.Panel):
 
         if not self.buttons:
 
-            wx.Font.AddPrivateFont(FONT)
         
             # Fonte do botão wx.FONTSTYLE_NORMAL, wx.FONTSTYLE_ITALIC, FONTSTYLE_SLANT
             font = wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL)
@@ -80,6 +79,8 @@ class myPanel(wx.Panel):
                     case 0:
                         button = wx.Button(self, label=f"{data[0]}", pos=data[1],size=data[2])
                         button.Bind(wx.EVT_BUTTON, self.turn_on)
+                        button.Bind(wx.EVT_ENTER_WINDOW, self.on_hover)  # Evento de passagem do mouse sobre o botão
+                        button.Bind(wx.EVT_LEAVE_WINDOW, self.on_leave)  # Evento de saída do mouse do botão
                         button.SetBackgroundColour(wx.Colour(BUTTON_COLOR))
                         button.SetFont(font)
                         button.SetWindowStyleFlag(wx.NO_BORDER)
@@ -88,6 +89,8 @@ class myPanel(wx.Panel):
                     case 1:
                         button = wx.Button(self, label=f"{data[0]}", pos=data[1],size=data[2])
                         button.Bind(wx.EVT_BUTTON, self.turn_off)
+                        button.Bind(wx.EVT_ENTER_WINDOW, self.on_hover)  # Evento de passagem do mouse sobre o botão
+                        button.Bind(wx.EVT_LEAVE_WINDOW, self.on_leave)  # Evento de saída do mouse do botão
                         button.SetBackgroundColour(wx.Colour(BUTTON_COLOR))
                         button.SetFont(font)
                         button.SetWindowStyleFlag(wx.NO_BORDER)
@@ -204,6 +207,14 @@ class myPanel(wx.Panel):
         image = wx.Image(image_path, wx.BITMAP_TYPE_ANY)
         image = image.Scale(new_width, new_height, wx.IMAGE_QUALITY_HIGH)
         return image
+    
+    def on_hover(self, event):
+        button = event.GetEventObject()
+        button.SetBackgroundColour(wx.Colour(HOVER_COLOR))
+
+    def on_leave(self, event):
+        button = event.GetEventObject()
+        button.SetBackgroundColour(wx.Colour(BUTTON_COLOR))
 
 class myFrame(wx.Frame):
     def __init__(self,parent,title):
