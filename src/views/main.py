@@ -70,6 +70,11 @@ class myPanel(wx.Panel):
                         button.Bind(wx.EVT_BUTTON, self.switch_mode)
                         button.SetBackgroundColour(wx.Colour(255, 255, 0))  # Amarelo
                         button.SetFont(main_button_font)
+                        
+                    case 1:
+                        button.Bind(wx.EVT_BUTTON, self.switch_mode)
+                        button.SetBackgroundColour(wx.Colour(255, 255, 0))  # Amarelo
+                        button.SetFont(main_button_font)
                     
                     case 2 | 3 | 4:
                         button.Bind(wx.EVT_BUTTON, self.switch_mode)
@@ -79,6 +84,8 @@ class myPanel(wx.Panel):
                         button.SetBackgroundColour(wx.Colour(255, 255, 0))  # Amarelo
                     
                 self.buttons.append(button)
+                
+    def turn_on
 
     def switch_mode(self, event):
         global state
