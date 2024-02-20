@@ -18,12 +18,13 @@ class MyFrame(wx.Frame):
         panel = wx.Panel(self)
 
         # Adicionando uma imagem de fundo
-        img = wx.Image(join(images, imagem_desligada), wx.BITMAP_TYPE_ANY)
-        bmp = wx.StaticBitmap(panel, -1, wx.Bitmap(img))
+        self.img = wx.Image(join(images, imagem_desligada), wx.BITMAP_TYPE_ANY)
+        self.bmp = wx.StaticBitmap(panel, -1, wx.Bitmap(self.img))
+        
 
         # Dimensões da imagem de fundo
-        image_width = img.GetWidth()
-        image_height = img.GetHeight()
+        image_width = self.img.GetWidth()
+        image_height = self.img.GetHeight()
 
         # Posicionar botões centralizados na parte inferior
         button_width = 100
