@@ -8,13 +8,13 @@ images = join(root, "images")
 #estado da coruja e do bot, Inicia desligado, quando ligado recebe True
 state = False
 
-IMAGE_OFF = join(images,"0.jpg")
-IMAGE_ON = join(images,"1.jpg")
+IMAGE_OFF = join(images,"background","0.jpg")
+IMAGE_ON = join(images,"background","1.jpg")
 # TAMANHOS ORIGINAIS
-WINDOW_WIDTH = 750 
-WINDOW_HEIGHT = 376
-#WINDOW_WIDTH = 1280
-#WINDOW_HEIGHT = 720
+#WINDOW_WIDTH = 750 
+#WINDOW_HEIGHT = 376
+WINDOW_WIDTH = 600
+WINDOW_HEIGHT = 300
 
 MAIN_BUTTON_WIDTH = 200
 MAIN_BUTTON_HEIGHT = 40
