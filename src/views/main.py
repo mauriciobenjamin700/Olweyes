@@ -98,7 +98,7 @@ class myPanel(wx.Panel):
                         toggleButton.Bind(wx.EVT_TOGGLEBUTTON,self.mode)
                         toggleButton.SetBackgroundColour(wx.Colour(OFF_BUTTON_COLOR))
                         toggleButton.SetFont(font)
-                        button.SetWindowStyleFlag(wx.NO_BORDER)
+                        toggleButton.SetWindowStyleFlag(wx.NO_BORDER)
                         self.buttons.append(toggleButton)
                     
                     case 3:
@@ -106,7 +106,7 @@ class myPanel(wx.Panel):
                         toggleButton.Bind(wx.EVT_TOGGLEBUTTON,self.mode)
                         toggleButton.SetBackgroundColour(wx.Colour(BUTTON_COLOR))
                         toggleButton.SetFont(font)
-                        button.SetWindowStyleFlag(wx.NO_BORDER)
+                        toggleButton.SetWindowStyleFlag(wx.NO_BORDER)
                         self.buttons.append(toggleButton)
                         
                     case 4:
@@ -114,7 +114,7 @@ class myPanel(wx.Panel):
                         toggleButton.Bind(wx.EVT_TOGGLEBUTTON,self.mode)
                         toggleButton.SetBackgroundColour(wx.Colour(OFF_BUTTON_COLOR))
                         toggleButton.SetFont(font)
-                        button.SetWindowStyleFlag(wx.NO_BORDER)
+                        toggleButton.SetWindowStyleFlag(wx.NO_BORDER)
                         self.buttons.append(toggleButton)
                         
                     case _:
