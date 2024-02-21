@@ -8,7 +8,7 @@ from  os.path import dirname,abspath
 import sys
 # Obtém o diretório atual do pai do script em execução
 current_dir = dirname(dirname(abspath(__file__)))
-print("linha9",current_dir)
+#print("linha9",current_dir)
 sys.path.append(current_dir)
 from models import observar,aceitar_fila,hereges
 
@@ -187,7 +187,7 @@ class myPanel(wx.Panel):
                 normal.SetValue(True)
                 fast.SetValue(True)
                 
-        print("Modo Atual = ",self.active_mode)
+        #print("Modo Atual = ",self.active_mode)
                     
 
 
@@ -202,7 +202,7 @@ class myPanel(wx.Panel):
         
     def bot_config(self):
         while self.state == True:
-            print("estou ligado")
+            #print("estou ligado")
             if(observar()):
                 if(aceitar_fila()):
                     if(hereges()):
@@ -210,7 +210,7 @@ class myPanel(wx.Panel):
                         self.switch_mode()
             sleep(self.active_mode)
             
-        print("não estou mais de olho")
+        #print("não estou mais de olho")
         
 
     def resize_image(self, image_path, new_width, new_height):
