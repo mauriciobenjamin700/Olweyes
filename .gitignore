@@ -1,3 +1,5 @@
 venv
 .pyc
 .spec
+
+__pycache__

@@ -1,6 +1,5 @@
 import wx
 from settings import *
-from cat import *
 
 
 class myPanel(wx.Panel):
@@ -99,19 +98,20 @@ class myPanel(wx.Panel):
         global state
         #print("on = ",state)
         if state == False:
-            global thread
+            #global thread
             self.switch_mode()
-            thread = Thread(target=bot)
-            thread.start()
+            print("Estou de olho")
+            #thread = Thread(target=bot)
+            #thread.start()
             
             
     def turn_off(self,event):
         global state
         #print("off = ",state)
         if state == True:
-            global thread
+            #global thread
             self.switch_mode()
-            thread.join()
+            #thread.join()
             print("Não estou mais de olho")
             
     
