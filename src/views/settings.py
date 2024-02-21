@@ -1,10 +1,9 @@
 from os.path import join
 import os
-from threading import Thread
+#from threading import Thread
 
 root = os.getcwd()
 images = join(root, "images")
-
 
 
 #VELOCIDADE DO BOT
