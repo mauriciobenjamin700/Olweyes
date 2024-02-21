@@ -1,6 +1,6 @@
 from src import *
 
-acabate()
+#acabate()
 
 app = myApp()
 app.MainLoop()

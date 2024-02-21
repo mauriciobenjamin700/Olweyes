@@ -1,6 +1,16 @@
 import wx
 import os.path as path
+from time import sleep
+from threading import Thread
 
+#importando as funções que o "JHON" fez
+from  os.path import dirname,abspath
+import sys
+# Obtém o diretório atual do pai do script em execução
+current_dir = dirname(dirname(abspath(__file__)))
+print("linha9",current_dir)
+sys.path.append(current_dir)
+from models import observar,aceitar_fila,hereges
 
 
 class myPanel(wx.Panel):
@@ -14,6 +24,7 @@ class myPanel(wx.Panel):
         self.state = False
         self.mode_options = mode_options
         self.active_mode = 5
+        self.thread = None
         
         self.main_button_width = MAIN_BUTTON_SIZE[0]
         self.main_button_height = MAIN_BUTTON_SIZE[1]
@@ -114,7 +125,9 @@ class myPanel(wx.Panel):
         if self.state == False:
             #global thread
             self.switch_mode()
-            print("Estou de olho")
+            self.buttons[0].SetBackgroundColour(wx.Colour(self.hover))
+            self.buttons[1].SetBackgroundColour(wx.Colour(self.on_button_color))
+            self.bot()
             #thread = Thread(target=bot)
             #thread.start()
             
@@ -123,8 +136,10 @@ class myPanel(wx.Panel):
         if self.state == True:
             #global thread
             self.switch_mode()
+            self.buttons[0].SetBackgroundColour(wx.Colour(self.on_button_color))
+            self.buttons[1].SetBackgroundColour(wx.Colour(self.hover))
             #thread.join()
-            print("Não estou mais de olho")
+
             
     
     def mode(self,event):
@@ -179,6 +194,24 @@ class myPanel(wx.Panel):
     def switch_mode(self,event=None):
         self.state = not self.state
         self.Refresh()
+        
+    def bot(self):
+        self.thread = Thread(target=self.bot_config).start()
+        if self.thread:
+            self.thread.join()
+        
+    def bot_config(self):
+        while self.state == True:
+            print("estou ligado")
+            if(observar()):
+                if(aceitar_fila()):
+                    if(hereges()):
+                        self.state = False
+                        self.switch_mode()
+            sleep(self.active_mode)
+            
+        print("não estou mais de olho")
+        
 
     def resize_image(self, image_path, new_width, new_height):
         image = wx.Image(image_path, wx.BITMAP_TYPE_ANY)

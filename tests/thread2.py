@@ -1,4 +1,4 @@
-import threading
+from threading import Thread
 import time
 
 # Variável de controle para interrupção das threads
@@ -17,8 +17,8 @@ def thread2():
         time.sleep(2)
 
 # Criando e iniciando as threads
-thread1 = threading.Thread(target=thread1)
-thread2 = threading.Thread(target=thread2)
+thread1 = Thread(target=thread1)
+thread2 = Thread(target=thread2)
 
 thread1.start()
 thread2.start()
