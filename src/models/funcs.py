@@ -1,48 +1,47 @@
 from pyautogui import locateCenterOnScreen,click,locateOnScreen
 from time import sleep
-from pathlib import Path
-from os.path import join,exists
+from os.path import join
+import os
 
-ROOT = Path.cwd()
+ROOT = os.getcwd()
 IMAGES = join(ROOT,"images","lol")
 
-def observador()-> bool:
+achei = True
+
+def observador(mode:int=3)-> bool:
     """
     Detecta se a fila do League of Legends foi encontrada.
     """
     localizador = join(IMAGES,"ENCONTRADA.png")
     achei = False
     while not achei:
+        print("Estou de olho")
         try:
-            print('procurando fila')
             if locateOnScreen(localizador,confidence=0.5):
-                print('Fila encontrada')
                 achei = True
-                sleep(3)
+                sleep(mode)
         except:
-            pass
-            print('Aguardando')
-            sleep(3)
+            sleep(mode)
         else:
             continue
     
     return achei
 
 
-def aceitar_fila():
+def aceitar_fila(mode:int=3):
     clica = join(IMAGES,"ACEITAR.png")
     aceitar = locateCenterOnScreen(clica,confidence=0.3)
     click(aceitar.x,aceitar.y)
-    sleep(4)
+    sleep(mode)
 
 
-def bot():
+def bot(mode:int=3):
     na_fila = join(IMAGES,'NA_FILA.png')
-    if observador():
-        aceitar_fila()
+    if observador(mode):
+        aceitar_fila(mode)
         sleep(10)
         if locateOnScreen(na_fila,confidence=0.4):
-            return observador()
+            bot(mode)
     
 
 

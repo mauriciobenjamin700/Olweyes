@@ -1,0 +1,6 @@
+pip install PyInstaller       
+pyinstaller --windowed main.py  
+
+troque main.py para o nome do seu arquivo.py que será criado
+
+https://www.youtube.com/watch?v=m49ftKzge0k&ab_channel=ProfessorNetoPaschoal

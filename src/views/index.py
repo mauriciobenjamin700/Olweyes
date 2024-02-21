@@ -1,37 +1,6 @@
 import wx
-from pathlib import Path
-from os.path import join
-
-root = Path.cwd()
-images = join(root, "images")
-
-#estado da coruja e do bot, Inicia desligado, quando ligado recebe True
-state = False
-
-#image = "images\\background\\0.jpg"
-#image = "images\\background\\1.jpg"
-
-IMAGE_OFF = join(images,"background","0.jpg")
-IMAGE_ON = join(images,"background","1.jpg")
-
-
-# TAMANHOS ORIGINAIS E FINAL
-WINDOW_WIDTH = 600
-WINDOW_HEIGHT = 300
-#WINDOW_WIDTH = 1280
-#WINDOW_HEIGHT = 720
-
-MAIN_BUTTON_WIDTH = 200
-MAIN_BUTTON_HEIGHT = 40
-
-PRECISION_BUTTON_WIDTH = MAIN_BUTTON_WIDTH//3
-PRECISION_BUTTON_HEIGHT =  MAIN_BUTTON_HEIGHT//2
-
-BUTTON_COLOR = "#FAFF00"
-OFF_BUTTON_COLOR = "#ABAE0C" 
-HOVER_COLOR = "#00FF00"  # Cor quando o mouse passa sobre o botão
-#OFF_BUTTON_COLOR = "#FF0000"
-
+from settings import *
+from cat import *
 
 
 class myPanel(wx.Panel):
@@ -130,13 +99,20 @@ class myPanel(wx.Panel):
         global state
         #print("on = ",state)
         if state == False:
+            global thread
             self.switch_mode()
+            thread = Thread(target=bot)
+            thread.start()
+            
             
     def turn_off(self,event):
         global state
         #print("off = ",state)
         if state == True:
+            global thread
             self.switch_mode()
+            thread.join()
+            print("Não estou mais de olho")
             
     
     def mode(self,event):
@@ -146,12 +122,16 @@ class myPanel(wx.Panel):
         
         slow,normal, fast = self.buttons[2:5]
         
+        global mode
+        
             #event.GetEventObject().SetLabel("Click to Off")
         match label:
             case "Cansado":
                 slow.SetBackgroundColour(wx.Colour(BUTTON_COLOR))
                 normal.SetBackgroundColour(wx.Colour(OFF_BUTTON_COLOR))
                 fast.SetBackgroundColour(wx.Colour(OFF_BUTTON_COLOR))
+                
+                mode = TIME_SLOW
                 
                 slow.SetValue(True)
                 normal.SetValue(True)
@@ -162,6 +142,8 @@ class myPanel(wx.Panel):
                 normal.SetBackgroundColour(wx.Colour(BUTTON_COLOR))
                 fast.SetBackgroundColour(wx.Colour(OFF_BUTTON_COLOR))
                 
+                mode = TIME_NORMAL
+                
                 slow.SetValue(True)
                 normal.SetValue(True)
                 fast.SetValue(True)
@@ -170,6 +152,8 @@ class myPanel(wx.Panel):
                 slow.SetBackgroundColour(wx.Colour(OFF_BUTTON_COLOR))
                 normal.SetBackgroundColour(wx.Colour(OFF_BUTTON_COLOR))
                 fast.SetBackgroundColour(wx.Colour(BUTTON_COLOR))
+                
+                mode = TIME_FAST
                 
                 slow.SetValue(True)
                 normal.SetValue(True)
